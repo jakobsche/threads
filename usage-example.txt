@@ -1,0 +1,34 @@
+Usage of TMessageGenerator in TInterruptInput = class(TCustomGPIOPort)
+
+TCustomGPIOPort is not declared, yet. It will be a component class, that will
+contain most of what a GPIO port provides, so that a modified TGPIOPort class
+(see package "raspi") will publish, what it needs, and a TInterruptInput will
+extend a binary Input with edge detection by using a TMessageGenerator thread.
+Because all TInterruptInput instances can use the same thread, only the first
+has to create one for all. This can be done with a class variable that is equal
+in all instances. See the following code sketch in addition.
+
+type
+
+TBinaryInput = class(TCustomGPIOPort)
+
+published
+  property Value;
+end;
+
+TInterruptInput = class(TBinaryInput, IMessageReceiver)
+private
+  class var MessageGenerator: TMessageGenerator;
+private {This section is only used by MessageGenerator to send messages to the
+    current TInterruptInput instance}
+  PriorValue: Boolean;
+  procedure GenerateEvents;
+private
+  ...
+  property SetEdges(Value: TEdges); {connects to MessageGenerator, if
+    Value <> [] oder disconnects, if Value = []}
+published
+  property Edges: TEdges read FEdges write SetEdges;
+  property OnEdge: TNotifyEvent read ... write ...;
+end;
+
