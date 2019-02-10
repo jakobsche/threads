@@ -77,6 +77,7 @@ begin
     end;
     I := 0;
     while I < ReceiverCount do begin
+      if Suspended then Continue;
       if Terminated then Exit;
       Synchronize(@Receivers[I].GenerateEvents);
       Inc(I)
