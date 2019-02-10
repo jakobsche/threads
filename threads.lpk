@@ -6,12 +6,13 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files Count="2">
       <Item1>
         <Filename Value="evmsg.pas"/>
+        <AddToUsesPkgSection Value="False"/>
         <UnitName Value="EvMsg"/>
       </Item1>
       <Item2>

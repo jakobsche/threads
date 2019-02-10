@@ -8,7 +8,7 @@ unit threads;
 interface
 
 uses
-  EvMsg, LazarusPackageIntf;
+  LazarusPackageIntf;
 
 implementation
 

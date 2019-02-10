@@ -65,18 +65,19 @@ procedure TMessageGenerator.Execute;
 var
   I: Integer;
 begin
-  if NewReceiver <> nil then begin
-    ReceiverList.Add(NewReceiver);
-    NewReceiver := nil
-  end;
-  if DestroyedReceiver <> nil then begin
-    ReceiverList.Remove(DestroyedReceiver);
-    DestroyedReceiver := nil;
-  end;
-  while ReceiverCount > 0 do begin
+  while not Terminated do begin
+    if Suspended then Continue;
+    if NewReceiver <> nil then begin
+      ReceiverList.Add(NewReceiver);
+      NewReceiver := nil
+    end;
+    if DestroyedReceiver <> nil then begin
+      ReceiverList.Remove(DestroyedReceiver);
+      DestroyedReceiver := nil;
+    end;
     I := 0;
     while I < ReceiverCount do begin
-      if Terminated or Suspended then Exit;
+      if Terminated then Exit;
       Synchronize(@Receivers[I].GenerateEvents);
       Inc(I)
     end;
