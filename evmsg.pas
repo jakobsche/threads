@@ -32,12 +32,12 @@ type
     property ReceiverList: TList read GetReceiverList;
   protected
     procedure Execute; override;
-    property ReceiverCount: Integer read GetReceiverCount;
     property Receivers[I: Integer]: IMessageReceiver read GetReceivers;
   public
     function AddReceiver(AReceiver: IMessageReceiver): Boolean;
     function RemoveReceiver(AReceiver: IMessageReceiver): Boolean;
     destructor Destroy; override;
+    property ReceiverCount: Integer read GetReceiverCount;
   end;
 
 implementation

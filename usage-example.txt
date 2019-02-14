@@ -25,7 +25,7 @@ private {This section is only used by MessageGenerator to send messages to the
   procedure GenerateEvents;
 private
   ...
-  property SetEdges(Value: TEdges); {connects to MessageGenerator, if
+  procedure SetEdges(AValue: TEdges); {connects to MessageGenerator, if
     Value <> [] oder disconnects, if Value = []}
 published
   property Edges: TEdges read FEdges write SetEdges;

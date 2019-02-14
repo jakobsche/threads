@@ -12,7 +12,6 @@
     <Files Count="2">
       <Item1>
         <Filename Value="evmsg.pas"/>
-        <AddToUsesPkgSection Value="False"/>
         <UnitName Value="EvMsg"/>
       </Item1>
       <Item2>
