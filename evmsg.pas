@@ -9,6 +9,8 @@ uses
 
 type
 
+  TMessageGenerator = class;
+
   { IMessageReceiver }
 
 { Interface for an object, that has to receive messages from a
@@ -17,6 +19,7 @@ type
     procedure GenerateEvents; {is called by a TMessageGenerator instance to
       send a message to an object with this Interface, calls, for example,
       the method DispatchMessage or DispatchMessageStr of that object}
+    property MessageGenerator: TMessageGenerator;
   end;
 
   { TMessageGenerator }
@@ -88,7 +91,7 @@ end;
 function TMessageGenerator.AddReceiver(AReceiver: IMessageReceiver): Boolean;
 begin
   if Suspended then begin
-    ReceiverList.Add(AReceiver);
+    if ReceiverList.IndexOf(AReceiver) = -1 then ReceiverList.Add(AReceiver);
     Result := True
   end
   else
